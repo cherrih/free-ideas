@@ -1,9 +1,8 @@
 import React from 'react';
 import Days from './Days.jsx';
+import Dates from './Dates.jsx';
 
 const Calendar = (props) => {
-  const today = new Date();
-  console.log(today.getDay());
   return (
     <div className="calendar-container">
       <div className="calendar-header">
@@ -17,6 +16,11 @@ const Calendar = (props) => {
         </div>
       </div>
       <Days />
+      <Dates />
+      <div>
+        <span className="calendar-past">past</span>
+        <span className="calendar-future">future</span>
+      </div>
     </div>
   )
 }
