@@ -10,9 +10,8 @@ class Dates extends React.Component {
     }
   }
 
-  // const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   renderDates () {
-    const { currMonth, selectedDate } = this.state;
+    const { currMonth } = this.state;
     const monthStart = dateFns.startOfMonth(currMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart);
@@ -26,21 +25,21 @@ class Dates extends React.Component {
     let formattedDate = '';
 
     while (day <= endDate) {
-      console.log(day, endDate)
       for (let i = 0; i < 7; i ++) {
         formattedDate = dateFns.format(day, dateFormat);
-        const cloneDay = day;
         days.push(
-          <div>{formattedDate}</div>
+          <div className="calendar-date" key={day}>
+            <span className="calendar-number">{formattedDate}</span>
+          </div>
         );
         day = dateFns.addDays(day, 1);
       }
       rows.push(
-      <div>{days}</div>
+      <div className="calendar-row" key={day}>{days}</div>
       )
       days = [];
     }
-    return <div>{rows}</div>
+    return <div className="calendar-body">{rows}</div>
   }
   render () {
     return (
