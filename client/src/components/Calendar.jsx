@@ -17,10 +17,6 @@ const Calendar = (props) => {
       </div>
       <Days />
       <Dates />
-      <div>
-        <span className="calendar-past">past</span>
-        <span className="calendar-future">future</span>
-      </div>
     </div>
   )
 }
