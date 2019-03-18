@@ -3,13 +3,16 @@ import React from 'react';
 const Header = (props) => {
   
   const freeStyle = {
-    left: props.mouseX
+    left: props.mouseX,
+    transform: `rotate(${props.mouseX}deg)`
   }
   const WTFStyle = {
-    left: 100 + props.mouseX
+    left: 100 + props.mouseX,
+    transform: `rotate(${props.mouseX}deg)`
   }
   const submitStyle = {
-    left: 200 + props.mouseX
+    left: 200 + props.mouseX,
+    transform: `rotate(${props.mouseX}deg)`
   }
   return (
     <div className="header-container">

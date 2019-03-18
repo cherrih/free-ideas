@@ -6,7 +6,7 @@ const Calendar = (props) => {
   return (
     <div className="calendar-container">
       <div className="calendar-header">
-        <div className="calendar-left">
+        <div className="calendar-header-left">
           <div>Deadline</div>
           <div className="calendar-header-title">April 1</div>
         </div>
