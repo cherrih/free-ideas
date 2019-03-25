@@ -60,6 +60,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(resp => {
         resp.items.map((event) => {
+          console.log(event)
           const start = event.start.date || event.start.dateTime;
           const date = new Date(start);
           const year = date.getFullYear();
@@ -67,7 +68,12 @@ class App extends React.Component {
           const day = date.getDate();
           const dateObj = { start: event.start.date || event.start.dateTime,
             end: event.end.date || event.end.dateTime,
-            title: event.summary};
+            title: event.summary,
+            isAll: event.description ? false : true,
+            isBelen: event.description === 'Belen'
+          };
+          console.log(dateObj.isBelen)
+          console.log(dateObj.isAll)
           if (events[year][month][day]) {
             events[year][month][day].push(dateObj)
           } else {
@@ -76,7 +82,7 @@ class App extends React.Component {
         })
         this.setState({
           events: events
-        }, () => {console.log(this.state.events)})
+        })
       })
       .catch(err => console.log(err));
   }

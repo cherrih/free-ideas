@@ -13,7 +13,6 @@ class Dates extends React.Component {
     let returnEvents = [];
     if(this.props.events[year][month][date]) {
       this.props.events[year][month][date].map(event => {
-        console.log('event');
         returnEvents.push(<div>{event.title}</div>)
       })  
     }
