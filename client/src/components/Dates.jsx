@@ -12,8 +12,8 @@ class Dates extends React.Component {
   renderEvents (year, month, date) {
     let returnEvents = [];
     if(this.props.events[year][month][date]) {
-      this.props.events[year][month][date].map(event => {
-        returnEvents.push(<div>{event.title}</div>)
+      this.props.events[year][month][date].map((event, i) => {
+        returnEvents.push(<div className={"calendar-event"} key={i}>{event.title}</div>)
       })  
     }
     return returnEvents;
