@@ -49,10 +49,6 @@ class App extends React.Component {
       mouseY: e.pageY
     })
   }
-  followMouse() {
-    console.log('I need to move')
-  }
-
   componentDidMount() {
     let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`;
     const events = this.state.events;
@@ -60,7 +56,6 @@ class App extends React.Component {
       .then(response => response.json())
       .then(resp => {
         resp.items.map((event) => {
-          console.log(event)
           const start = event.start.date || event.start.dateTime;
           const date = new Date(start);
           const year = date.getFullYear();
@@ -72,8 +67,6 @@ class App extends React.Component {
             isAll: event.description ? false : true,
             isBelen: event.description === 'Belen'
           };
-          console.log(dateObj.isBelen)
-          console.log(dateObj.isAll)
           if (events[year][month][day]) {
             events[year][month][day].push(dateObj)
           } else {
