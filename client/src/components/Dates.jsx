@@ -9,8 +9,15 @@ class Dates extends React.Component {
       selectedDate: new Date()
     }
   }
-  renderEvents () {
-
+  renderEvents (year, month, date) {
+    let returnEvents = [];
+    if(this.props.events[year][month][date]) {
+      this.props.events[year][month][date].map(event => {
+        console.log('event');
+        returnEvents.push(<div>{event.title}</div>)
+      })  
+    }
+    return returnEvents;
   }
 
   renderDates () {
@@ -29,12 +36,16 @@ class Dates extends React.Component {
     while (day <= endDate) {
       for (let i = 0; i < 7; i ++) {
         formattedDate = dateFns.format(day, dateFormat);
+        const year = dateFns.getYear(day);
+        const month = dateFns.getMonth(day);
+        const date = dateFns.getDate(day);
+
         days.push(
           <div className={`calendar-date ${
             dateFns.isSameMonth(day, monthStart) ?
             "current-month" : "not-current"
           }`} key={day}>
-            <div>{}</div>
+            <div>{this.renderEvents(year, month, date)}</div>
             <span className="calendar-number">{formattedDate}</span>
           </div>
         );
