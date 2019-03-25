@@ -16,7 +16,7 @@ const Calendar = (props) => {
         </div>
       </div>
       <Days />
-      <Dates />
+      <Dates events={props.events}/>
     </div>
   )
 }

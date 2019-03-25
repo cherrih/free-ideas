@@ -7,10 +7,38 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      today: new Date(),
       mouseX: null,
       mouseY: null,
-      events: {}
+      events: {
+        2019: {
+          0: {},
+          1: {},
+          2: {},
+          3: {},
+          4: {},
+          5: {},
+          6: {},
+          7: {},
+          8: {},
+          9: {},
+          10: {},
+          11: {},
+        },
+        2020: {
+          0: {},
+          1: {},
+          2: {},
+          3: {},
+          4: {},
+          5: {},
+          6: {},
+          7: {},
+          8: {},
+          9: {},
+          10: {},
+          11: {},
+        },
+      }
     };
     this.mouseMove = this.mouseMove.bind(this);
   }
@@ -27,20 +55,28 @@ class App extends React.Component {
 
   componentDidMount() {
     let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`;
+    const events = this.state.events;
     fetch(url)
       .then(response => response.json())
       .then(resp => {
-        const events = {}
         resp.items.map((event) => {
           const start = event.start.date || event.start.dateTime;
-          events[start] = {
+          const date = new Date(start);
+          const year = date.getFullYear();
+          const month = date.getMonth();
+          const day = date.getDate();
+          const dateObj = { start: event.start.date || event.start.dateTime,
             end: event.end.date || event.end.dateTime,
-            title: event.summary,
+            title: event.summary};
+          if (events[year][month][day]) {
+            events[year][month][day].push(dateObj)
+          } else {
+            events[year][month][day] = [dateObj]
           }
         })
         this.setState({
           events: events
-        }, () => console.log(this.state.events))
+        }, () => {console.log(this.state.events)})
       })
       .catch(err => console.log(err));
   }
@@ -49,7 +85,7 @@ class App extends React.Component {
     return (
       <div className="body" onMouseMove={this.mouseMove}>
         <Header mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
-        <Calendar />
+        <Calendar events={this.state.events}/>
         <footer>
           <div className="catch">catch that f*cking idea... </div>
         </footer>

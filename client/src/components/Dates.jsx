@@ -9,6 +9,9 @@ class Dates extends React.Component {
       selectedDate: new Date()
     }
   }
+  renderEvents () {
+
+  }
 
   renderDates () {
     const { currMonth } = this.state;
@@ -23,12 +26,15 @@ class Dates extends React.Component {
     let days = [];
     let day = startDate;
     let formattedDate = '';
-
     while (day <= endDate) {
       for (let i = 0; i < 7; i ++) {
         formattedDate = dateFns.format(day, dateFormat);
         days.push(
-          <div className="calendar-date" key={day}>
+          <div className={`calendar-date ${
+            dateFns.isSameMonth(day, monthStart) ?
+            "current-month" : "not-current"
+          }`} key={day}>
+            <div>{}</div>
             <span className="calendar-number">{formattedDate}</span>
           </div>
         );
